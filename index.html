@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinBank - Digital Banking</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">
+                <i data-lucide="landmark"></i>
+            </div>
+            <span>FinBank</span>
+        </div>
+
+        <nav>
+            <a href="#" class="nav-item active">
+                <i data-lucide="layout-dashboard"></i>
+                Dashboard
+            </a>
+
+            <a href="#" class="nav-item">
+                <i data-lucide="wallet"></i>
+                Accounts
+            </a>
+
+            <a href="#" class="nav-item">
+                <i data-lucide="arrow-left-right"></i>
+                Transfers
+            </a>
+
+            <a href="#" class="nav-item">
+                <i data-lucide="credit-card"></i>
+                Cards
+            </a>
+
+            <a href="#" class="nav-item">
+                <i data-lucide="bar-chart-3"></i>
+                Analytics
+            </a>
+
+            <a href="#" class="nav-item">
+                <i data-lucide="settings"></i>
+                Settings
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="#" class="nav-item">
+                <i data-lucide="help-circle"></i>
+                Help Center
+            </a>
+
+            <a href="#" class="nav-item logout" onclick="logout()">
+                <i data-lucide="log-out"></i>
+                Logout
+            </a>
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <!-- Header -->
+        <header class="header">
+
+            <button class="menu-btn" onclick="toggleSidebar()">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <div>
+                <p class="welcome-small">Welcome back</p>
+                <h1>Good evening, Manish 👋</h1>
+            </div>
+
+            <div class="header-actions">
+
+                <button class="icon-btn">
+                    <i data-lucide="bell"></i>
+                    <span class="notification"></span>
+                </button>
+
+                <div class="profile">
+                    <div class="avatar">MK</div>
+                    <div class="profile-info">
+                        <strong>Manish Kumar</strong>
+                        <small>Premium Account</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- Dashboard -->
+        <section class="dashboard">
+
+            <!-- Balance Card -->
+            <div class="balance-card">
+
+                <div class="balance-top">
+                    <div>
+                        <span>Total Balance</span>
+                        <h2 id="balance">₹1,24,580.50</h2>
+                    </div>
+
+                    <button class="eye-btn" onclick="toggleBalance()">
+                        <i data-lucide="eye"></i>
+                    </button>
+                </div>
+
+                <div class="account-number">
+                    <span>Account Number</span>
+                    <strong>•••• •••• 4589</strong>
+                </div>
+
+                <div class="balance-bottom">
+                    <div>
+                        <small>Available Balance</small>
+                        <strong>₹1,20,450.50</strong>
+                    </div>
+
+                    <div>
+                        <small>Account Type</small>
+                        <strong>Savings</strong>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Quick Actions -->
+            <div class="quick-section">
+
+                <div class="section-heading">
+                    <h2>Quick Actions</h2>
+                </div>
+
+                <div class="quick-actions">
+
+                    <button onclick="showMessage('Transfer Money')">
+                        <div class="action-icon">
+                            <i data-lucide="send"></i>
+                        </div>
+                        <span>Transfer</span>
+                    </button>
+
+                    <button onclick="showMessage('Add Money')">
+                        <div class="action-icon">
+                            <i data-lucide="plus"></i>
+                        </div>
+                        <span>Add Money</span>
+                    </button>
+
+                    <button onclick="showMessage('Pay Bills')">
+                        <div class="action-icon">
+                            <i data-lucide="receipt"></i>
+                        </div>
+                        <span>Pay Bills</span>
+                    </button>
+
+                    <button onclick="showMessage('Request Money')">
+                        <div class="action-icon">
+                            <i data-lucide="hand-coins"></i>
+                        </div>
+                        <span>Request</span>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Content Grid -->
+            <div class="content-grid">
+
+                <!-- Transactions -->
+                <section class="transactions card">
+
+                    <div class="card-header">
+                        <div>
+                            <span class="label">Activity</span>
+                            <h2>Recent Transactions</h2>
+                        </div>
+
+                        <button class="view-btn">
+                            View All
+                            <i data-lucide="arrow-right"></i>
+                        </button>
+                    </div>
+
+
+                    <div class="transaction-list">
+
+                        <div class="transaction">
+                            <div class="transaction-icon shopping">
+                                <i data-lucide="shopping-bag"></i>
+                            </div>
+
+                            <div class="transaction-info">
+                                <strong>Amazon Shopping</strong>
+                                <span>Today, 4:32 PM</span>
+                            </div>
+
+                            <div class="transaction-amount debit">
+                                -₹2,499
+                            </div>
+                        </div>
+
+
+                        <div class="transaction">
+                            <div class="transaction-icon income">
+                                <i data-lucide="arrow-down-left"></i>
+                            </div>
+
+                            <div class="transaction-info">
+                                <strong>Salary Credit</strong>
+                                <span>Today, 10:15 AM</span>
+                            </div>
+
+                            <div class="transaction-amount credit">
+                                +₹45,000
+                            </div>
+                        </div>
+
+
+                        <div class="transaction">
+                            <div class="transaction-icon food">
+                                <i data-lucide="utensils"></i>
+                            </div>
+
+                            <div class="transaction-info">
+                                <strong>Restaurant</strong>
+                                <span>Yesterday, 8:20 PM</span>
+                            </div>
+
+                            <div class="transaction-amount debit">
+                                -₹850
+                            </div>
+                        </div>
+
+
+                        <div class="transaction">
+                            <div class="transaction-icon transfer">
+                                <i data-lucide="send"></i>
+                            </div>
+
+                            <div class="transaction-info">
+                                <strong>Transfer to Rahul</strong>
+                                <span>Yesterday, 2:40 PM</span>
+                            </div>
+
+                            <div class="transaction-amount debit">
+                                -₹5,000
+                            </div>
+                        </div>
+
+
+                        <div class="transaction">
+                            <div class="transaction-icon shopping">
+                                <i data-lucide="shopping-cart"></i>
+                            </div>
+
+                            <div class="transaction-info">
+                                <strong>Grocery Store</strong>
+                                <span>18 Aug, 6:10 PM</span>
+                            </div>
+
+                            <div class="transaction-amount debit">
+                                -₹1,240
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Spending -->
+                <section class="spending card">
+
+                    <div class="card-header">
+                        <div>
+                            <span class="label">Overview</span>
+                            <h2>Monthly Spending</h2>
+                        </div>
+
+                        <select>
+                            <option>August</option>
+                            <option>July</option>
+                            <option>June</option>
+                        </select>
+                    </div>
+
+                    <div class="spending-total">
+                        <strong>₹18,450</strong>
+                        <span>This month</span>
+                    </div>
+
+                    <div class="progress">
+
+                        <div class="progress-row">
+                            <span>
+                                <i class="dot food-dot"></i>
+                                Food
+                            </span>
+                            <strong>₹5,200</strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <span style="width: 72%"></span>
+                        </div>
+
+
+                        <div class="progress-row">
+                            <span>
+                                <i class="dot shopping-dot"></i>
+                                Shopping
+                            </span>
+                            <strong>₹7,850</strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <span style="width: 86%"></span>
+                        </div>
+
+
+                        <div class="progress-row">
+                            <span>
+                                <i class="dot bills-dot"></i>
+                                Bills
+                            </span>
+                            <strong>₹3,400</strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <span style="width: 48%"></span>
+                        </div>
+
+
+                        <div class="progress-row">
+                            <span>
+                                <i class="dot other-dot"></i>
+                                Others
+                            </span>
+                            <strong>₹2,000</strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <span style="width: 30%"></span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- Security Banner -->
+            <div class="security-banner">
+
+                <div class="security-icon">
+                    <i data-lucide="shield-check"></i>
+                </div>
+
+                <div>
+                    <strong>Your account is secure</strong>
+                    <p>Last security check completed successfully.</p>
+                </div>
+
+                <button onclick="showMessage('Security settings opened')">
+                    Security Settings
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i data-lucide="check-circle"></i>
+        <span id="toastText">Success</span>
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
