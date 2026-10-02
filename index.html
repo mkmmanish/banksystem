@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinBank - Digital Banking</title>
+    <title>ManishBank - Digital Banking</title>
 
-    <link rel="stylesheet" href="style.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Style.css">
 
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -23,52 +19,65 @@
             <div class="logo-icon">
                 <i data-lucide="landmark"></i>
             </div>
-            <span>FinBank</span>
+            <span>ManishBank</span>
         </div>
 
         <nav>
-            <a href="#" class="nav-item active">
+            <a href="#" class="nav-item active" data-page="dashboard">
                 <i data-lucide="layout-dashboard"></i>
                 Dashboard
             </a>
 
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-page="customers">
+                <i data-lucide="users"></i>
+                Customers
+            </a>
+
+            <a href="#" class="nav-item" data-page="accounts">
                 <i data-lucide="wallet"></i>
                 Accounts
             </a>
 
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-page="transactions">
+                <i data-lucide="receipt"></i>
+                Transactions
+            </a>
+
+            <a href="#" class="nav-item" data-page="transfers">
                 <i data-lucide="arrow-left-right"></i>
-                Transfers
+                Fund Transfers
             </a>
 
-            <a href="#" class="nav-item">
-                <i data-lucide="credit-card"></i>
-                Cards
+            <a href="#" class="nav-item" data-page="loans">
+                <i data-lucide="hand-coins"></i>
+                Loans
             </a>
 
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-page="deposits">
+                <i data-lucide="landmark"></i>
+                Fixed / Recurring
+            </a>
+
+            <a href="#" class="nav-item" data-page="admin">
+                <i data-lucide="shield"></i>
+                Admin Panel
+            </a>
+
+            <a href="#" class="nav-item" data-page="analytics">
                 <i data-lucide="bar-chart-3"></i>
-                Analytics
+                Reports
             </a>
 
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-page="notifications">
+                <i data-lucide="bell"></i>
+                Notifications
+            </a>
+
+            <a href="#" class="nav-item" data-page="settings">
                 <i data-lucide="settings"></i>
                 Settings
             </a>
         </nav>
-
-        <div class="sidebar-bottom">
-            <a href="#" class="nav-item">
-                <i data-lucide="help-circle"></i>
-                Help Center
-            </a>
-
-            <a href="#" class="nav-item logout" onclick="logout()">
-                <i data-lucide="log-out"></i>
-                Logout
-            </a>
-        </div>
 
     </aside>
 
@@ -85,7 +94,7 @@
 
             <div>
                 <p class="welcome-small">Welcome back</p>
-                <h1>Good evening, Manish 👋</h1>
+                <h1 id="timeGreeting">Good morning, Manish 👋</h1>
             </div>
 
             <div class="header-actions">
@@ -95,11 +104,26 @@
                     <span class="notification"></span>
                 </button>
 
-                <div class="profile">
+                <div class="profile-switcher">
                     <div class="avatar">MK</div>
                     <div class="profile-info">
-                        <strong>Manish Kumar</strong>
-                        <small>Premium Account</small>
+                        <strong id="profileDisplayName">Manish Kumar</strong>
+                        <small id="currentAccountLabel">Primary Account</small>
+                    </div>
+                    <button type="button" class="account-switch-button" id="accountSwitchButton"
+                        aria-label="Switch account" aria-haspopup="menu" aria-expanded="false">
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="account-switch-menu" id="accountSwitchMenu" role="menu" hidden>
+                        <button type="button" role="menuitem" data-switch-account="primary">
+                            <span>Primary Account</span><small>•••• 4589</small>
+                        </button>
+                        <button type="button" role="menuitem" data-switch-account="savings">
+                            <span>Savings Account</span><small>•••• 2124</small>
+                        </button>
+                        <button type="button" role="menuitem" data-switch-account="investment">
+                            <span>Investment Account</span><small>•••• 8841</small>
+                        </button>
                     </div>
                 </div>
 
@@ -109,6 +133,7 @@
 
 
         <!-- Dashboard -->
+        <section class="page-panel active" data-page-panel="dashboard">
         <section class="dashboard">
 
             <!-- Balance Card -->
@@ -127,18 +152,18 @@
 
                 <div class="account-number">
                     <span>Account Number</span>
-                    <strong>•••• •••• 4589</strong>
+                    <strong id="dashboardAccountNumber">•••• •••• 4589</strong>
                 </div>
 
                 <div class="balance-bottom">
                     <div>
                         <small>Available Balance</small>
-                        <strong>₹1,20,450.50</strong>
+                        <strong id="availableBalance">₹1,20,450.50</strong>
                     </div>
 
                     <div>
                         <small>Account Type</small>
-                        <strong>Savings</strong>
+                        <strong id="dashboardAccountType">Primary</strong>
                     </div>
                 </div>
 
@@ -154,28 +179,28 @@
 
                 <div class="quick-actions">
 
-                    <button onclick="showMessage('Transfer Money')">
+                    <button type="button" class="action-btn" data-action="transfer">
                         <div class="action-icon">
                             <i data-lucide="send"></i>
                         </div>
                         <span>Transfer</span>
                     </button>
 
-                    <button onclick="showMessage('Add Money')">
+                    <button type="button" class="action-btn" data-action="add-money">
                         <div class="action-icon">
                             <i data-lucide="plus"></i>
                         </div>
                         <span>Add Money</span>
                     </button>
 
-                    <button onclick="showMessage('Pay Bills')">
+                    <button type="button" class="action-btn" data-action="pay-bills">
                         <div class="action-icon">
                             <i data-lucide="receipt"></i>
                         </div>
                         <span>Pay Bills</span>
                     </button>
 
-                    <button onclick="showMessage('Request Money')">
+                    <button type="button" class="action-btn" data-action="request">
                         <div class="action-icon">
                             <i data-lucide="hand-coins"></i>
                         </div>
@@ -186,6 +211,155 @@
 
             </div>
 
+            <div class="stats-row">
+                <div class="stat-card">
+                    <span class="stat-label">Total Deposits</span>
+                    <strong id="dashboardDeposits">₹0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-label">Total Withdrawals</span>
+                    <strong id="dashboardWithdrawals">₹0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-label">Customers</span>
+                    <strong id="dashboardCustomers">0</strong>
+                    <small class="positive">Demo customer records</small>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-label">Open Accounts</span>
+                    <strong id="dashboardAccounts">0</strong>
+                    <small class="neutral">Active demo accounts</small>
+                </div>
+            </div>
+
+            <section class="dashboard-tools" aria-label="Current time and calendar">
+                <div class="clock-panel">
+                    <h2>Current time</h2>
+                    <time id="dashboardTime" class="clock-time"></time>
+                    <p id="dashboardDate" class="clock-date"></p>
+                </div>
+
+                <div class="calendar-panel">
+                    <div class="calendar-header">
+                        <h2 id="calendarMonth" aria-live="polite"></h2>
+                        <div class="calendar-controls">
+                            <button type="button" id="previousMonth" aria-label="Previous month">&lsaquo;</button>
+                            <button type="button" id="nextMonth" aria-label="Next month">&rsaquo;</button>
+                        </div>
+                    </div>
+                    <div class="calendar-grid calendar-weekdays" aria-hidden="true">
+                        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span>
+                        <span>Thu</span><span>Fri</span><span>Sat</span>
+                    </div>
+                    <div class="calendar-grid" id="calendarDays" role="grid" aria-labelledby="calendarMonth"></div>
+                </div>
+            </section>
+
+            <div class="workbench">
+                <section class="card transfer-panel">
+                    <div class="card-header compact">
+                        <div>
+                            <span class="label">Quick Transfer</span>
+                            <h2>Send money</h2>
+                        </div>
+                    </div>
+
+                    <form id="transferForm">
+                        <label for="recipientSelect">Recipient</label>
+                        <select id="recipientSelect" name="recipient">
+                            <option value="Rahul Sharma">Rahul Sharma</option>
+                            <option value="Priya Singh">Priya Singh</option>
+                            <option value="Amit Verma">Amit Verma</option>
+                            <option value="Neha Gupta">Neha Gupta</option>
+                        </select>
+
+                        <label for="transferAmount">Amount</label>
+                        <div class="amount-field">
+                            <span>₹</span>
+                            <input type="number" id="transferAmount" min="1" value="2500" placeholder="0.00" />
+                        </div>
+
+                        <div class="quick-amounts">
+                            <button type="button" data-amount="500">₹500</button>
+                            <button type="button" data-amount="1000">₹1,000</button>
+                            <button type="button" data-amount="2500">₹2,500</button>
+                            <button type="button" data-amount="5000">₹5,000</button>
+                        </div>
+
+                        <p class="transfer-summary" id="transferSummary">Ready to send ₹2,500 to Rahul Sharma</p>
+                        <button type="submit" class="primary-btn">Send Now</button>
+                    </form>
+                </section>
+
+                <section class="card goals-panel">
+                    <div class="card-header compact">
+                        <div>
+                            <span class="label">Goals</span>
+                            <h2>Savings goals</h2>
+                        </div>
+                        <button class="view-btn">Add Goal</button>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-topline">
+                            <strong>Emergency fund</strong>
+                            <span>₹48,000 / ₹80,000</span>
+                        </div>
+                        <div class="progress-bar small"><span style="width: 60%"></span></div>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-topline">
+                            <strong>Vacation</strong>
+                            <span>₹22,500 / ₹40,000</span>
+                        </div>
+                        <div class="progress-bar small"><span style="width: 56%"></span></div>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-topline">
+                            <strong>New laptop</strong>
+                            <span>₹65,000 / ₹90,000</span>
+                        </div>
+                        <div class="progress-bar small"><span style="width: 72%"></span></div>
+                    </section>
+
+                <section class="card bills-panel">
+                    <div class="card-header compact">
+                        <div>
+                            <span class="label">Bills</span>
+                            <h2>Upcoming payments</h2>
+                        </div>
+                    </div>
+
+                    <div class="bill-item">
+                        <div>
+                            <strong>Rent</strong>
+                            <small>Due in 3 days</small>
+                        </div>
+                        <span>₹18,500</span>
+                    </div>
+
+                    <div class="bill-item">
+                        <div>
+                            <strong>Internet</strong>
+                            <small>Due in 5 days</small>
+                        </div>
+                        <span>₹1,200</span>
+                    </div>
+
+                    <div class="bill-item">
+                        <div>
+                            <strong>Insurance</strong>
+                            <small>Due in 7 days</small>
+                        </div>
+                        <span>₹4,990</span>
+                    </div>
+                </section>
+            </div>
 
             <!-- Content Grid -->
             <div class="content-grid">
@@ -206,7 +380,7 @@
                     </div>
 
 
-                    <div class="transaction-list">
+                    <div class="transaction-list" id="dashboardRecentTransactions">
 
                         <div class="transaction">
                             <div class="transaction-icon shopping">
@@ -385,16 +559,243 @@
                     <p>Last security check completed successfully.</p>
                 </div>
 
-                <button onclick="showMessage('Security settings opened')">
+                <button type="button" data-open-security-settings>
                     Security Settings
                 </button>
 
             </div>
 
         </section>
+        </section>
+
+        <section class="page-panel" data-page-panel="accounts">
+            <div class="page-shell">
+                <div class="page-header">
+                    <div>
+                        <span class="label">Overview</span>
+                        <h2>Account Management</h2>
+                    </div>
+                </div>
+                <div class="account-grid">
+                    <button type="button" class="account-card primary" data-account="primary" aria-pressed="false">
+                        <span>Primary Account</span>
+                        <strong>₹1,24,580.50</strong>
+                        <small>•••• 4589</small>
+                    </button>
+                    <button type="button" class="account-card" data-account="savings" aria-pressed="false">
+                        <span>Savings</span>
+                        <strong>₹65,430.00</strong>
+                        <small>•••• 2124</small>
+                    </button>
+                    <button type="button" class="account-card" data-account="investment" aria-pressed="false">
+                        <span>Investment</span>
+                        <strong>₹2,15,900.00</strong>
+                        <small>•••• 8841</small>
+                    </button>
+                </div>
+                <section class="account-details" id="accountDetails" aria-live="polite" hidden>
+                    <h3 id="accountDetailsTitle"></h3>
+                    <dl>
+                        <div>
+                            <dt>Account type</dt>
+                            <dd id="accountDetailsType"></dd>
+                        </div>
+                        <div>
+                            <dt>Current balance</dt>
+                            <dd id="accountDetailsBalance"></dd>
+                        </div>
+                        <div>
+                            <dt>Account number</dt>
+                            <dd id="accountDetailsNumber"></dd>
+                        </div>
+                        <div id="accountProfitDetail" hidden>
+                            <dt>Investment profit</dt>
+                            <dd id="accountProfitValue"></dd>
+                            <button type="button" class="profit-edit-button" data-profit-edit="account">Update profit</button>
+                            <form class="profit-editor" data-profit-form="account" hidden>
+                                <label for="accountProfitInput">Updated profit amount (₹)</label>
+                                <input id="accountProfitInput" name="profit" type="number" min="0" step="0.01" required>
+                                <button type="submit" class="primary-btn">Save profit</button>
+                            </form>
+                        </div>
+                    </dl>
+                </section>
+                <div id="accountManagementWorkspace"></div>
+            </div>
+        </section>
+
+        <section class="page-panel" data-page-panel="transfers">
+            <div class="page-shell">
+                <div class="page-header">
+                    <div>
+                        <span class="label">Payments</span>
+                        <h2>Fund Transfers</h2>
+                    </div>
+                </div>
+                <div id="transferManagementWorkspace"></div>
+                <div class="transfer-list" id="transferHistoryList">
+                    <div class="list-row">
+                        <div>
+                            <strong>Rahul Sharma</strong>
+                            <small>Today, 4:32 PM</small>
+                        </div>
+                        <span class="debit">-₹2,500</span>
+                    </div>
+                    <div class="list-row">
+                        <div>
+                            <strong>Priya Singh</strong>
+                            <small>Yesterday, 9:15 AM</small>
+                        </div>
+                        <span class="debit">-₹1,200</span>
+                    </div>
+                    <div class="list-row">
+                        <div>
+                            <strong>Salary Credit</strong>
+                            <small>Today, 10:15 AM</small>
+                        </div>
+                        <span class="credit">+₹45,000</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-panel" data-page-panel="customers">
+            <div class="page-shell">
+                <div class="page-header">
+                    <div>
+                        <span class="label">Customer directory</span>
+                        <h2>Customer Management</h2>
+                    </div>
+                </div>
+                <div id="customerManagementWorkspace"></div>
+            </div>
+        </section>
+
+        <section class="page-panel" data-page-panel="transactions">
+            <div class="page-shell">
+                <div class="page-header">
+                    <div><span class="label">Account activity</span><h2>Transactions</h2></div>
+                </div>
+                <div id="transactionWorkspace"></div>
+            </div>
+        </section>
+
+        <section class="page-panel" data-page-panel="loans">
+            <div class="page-shell">
+                <div class="page-header">
+                    <div><span class="label">Credit products</span><h2>Loans</h2></div>
+                </div>
+                <div id="loanWorkspace"></div>
+            </div>
+        </section>
+
+        <section class="page-panel" data-page-panel="deposits">
+            <div class="page-shell">
+                <div class="page-header">
+                    <div><span class="label">Savings products</span><h2>Fixed &amp; Recurring Deposits</h2></div>
+                </div>
+                <div id="depositWorkspace"></div>
+            </div>
+        </section>
+
+        <section class="page-panel" data-page-panel="admin">
+            <div class="page-shell">
+                <div class="page-header">
+                    <div><span class="label">Demo administration</span><h2>Admin Panel</h2></div>
+                </div>
+                <div id="adminWorkspace"></div>
+            </div>
+        </section>
+
+        <section class="page-panel" data-page-panel="analytics">
+            <div class="page-shell">
+                <div class="page-header">
+                    <div>
+                        <span class="label">Insights</span>
+                        <h2>Reports</h2>
+                    </div>
+                </div>
+                <div id="reportsWorkspace"></div>
+                <div class="analytics-grid">
+                    <div class="mini-stat">
+                        <small>Monthly spend</small>
+                        <strong>₹18,450</strong>
+                    </div>
+                    <div class="mini-stat">
+                        <small>Cashback</small>
+                        <strong>₹3,680</strong>
+                    </div>
+                    <div class="mini-stat">
+                        <small>Investment profit</small>
+                        <strong id="analyticsProfitValue">₹12,240.00</strong>
+                        <button type="button" class="profit-edit-button" data-profit-edit="analytics">Update profit</button>
+                        <form class="profit-editor" data-profit-form="analytics" hidden>
+                            <label for="analyticsProfitInput">Updated profit amount (₹)</label>
+                            <input id="analyticsProfitInput" name="profit" type="number" min="0" step="0.01" required>
+                            <button type="submit" class="primary-btn">Save profit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-panel" data-page-panel="notifications">
+            <div class="page-shell">
+                <div class="page-header">
+                    <div><span class="label">Account activity</span><h2>Notifications</h2></div>
+                </div>
+                <div id="notificationsWorkspace"></div>
+            </div>
+        </section>
+
+        <section class="page-panel" data-page-panel="settings">
+            <div class="page-shell">
+                <div class="page-header">
+                    <div>
+                        <span class="label">Protect your account</span>
+                        <h2>Security Settings</h2>
+                    </div>
+                </div>
+                <div class="settings-list">
+                    <section class="settings-profile">
+                        <h3>Profile settings</h3>
+                        <div id="profileSettingsWorkspace"></div>
+                    </section>
+                    <div class="setting-row">
+                        <div>
+                            <strong>Two-factor authentication</strong>
+                            <small>Require a verification code when signing in.</small>
+                        </div>
+                        <button type="button" class="security-toggle" role="switch" aria-checked="true" data-setting="two-factor">On</button>
+                    </div>
+                    <div class="setting-row">
+                        <div>
+                            <strong>Transaction alerts</strong>
+                            <small>Get notified when money moves in or out.</small>
+                        </div>
+                        <button type="button" class="security-toggle" role="switch" aria-checked="true" data-setting="transaction-alerts">On</button>
+                    </div>
+                    <div class="setting-row">
+                        <div>
+                            <strong>New sign-in alerts</strong>
+                            <small>Get notified when your account is accessed on a new device.</small>
+                        </div>
+                        <button type="button" class="security-toggle" role="switch" aria-checked="true" data-setting="signin-alerts">On</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </main>
 
+
+    <!-- Quick Action Modal -->
+    <div class="action-modal" id="actionModal" aria-hidden="true">
+        <div class="action-modal-card">
+            <button class="close-modal" type="button" data-close-modal aria-label="Close action panel">&times;</button>
+            <div id="actionModalContent"></div>
+        </div>
+    </div>
 
     <!-- Toast -->
     <div class="toast" id="toast">
@@ -403,7 +804,8 @@
     </div>
 
 
-    <script src="script.js"></script>
+    <script src="Script.js"></script>
+    <script src="BankingDemo.js"></script>
 
 </body>
 </html>
