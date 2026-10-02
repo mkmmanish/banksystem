@@ -1,6 +1,6 @@
 # ManishBank
 
-ManishBank is a static, browser-based banking dashboard prototype. Open `index.html` directly or serve this folder with a local web server to explore the demo.
+ManishBank is a static, browser-based banking dashboard prototype.
 
 ## Demo workflows
 
@@ -8,6 +8,14 @@ The interface includes dashboard metrics, customer and KYC profiles, account man
 
 Customer, account, transaction, loan, deposit, notification, and profile records are stored in this browser's `localStorage`. Clearing browser storage resets demo records.
 
+## Deploy on Render
+
+1. Push or merge the project to the `main` branch on GitHub.
+2. In Render, choose **New + → Blueprint**, connect `mkmmanish/banksystem`, and select `main`.
+3. Render reads `render.yaml`, builds the static site with `npm run build`, and publishes `dist/`. The generated public URL appears in the Render dashboard.
+
+The build publishes only `index.html`, `Style.css`, `Script.js`, and `BankingDemo.js`. GitHub Pages can also host the dashboard using the existing workflow.
+
 ## Important limitation
 
-The dashboard has no backend, login, or access control. It does not process real money or provide production authentication, authorization, KYC verification, banking security, or financial advice. Admin pages and security settings are demo UI only. Do not enter real customer or financial information.
+The dashboard has no backend, login, or access control. Render and GitHub Pages both serve static content; neither adds backend banking security. It does not process real money or provide production authentication, authorization, KYC verification, banking security, or financial advice. Admin pages and security settings are demo UI only. Do not enter real customer or financial information.

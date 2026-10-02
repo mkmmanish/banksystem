@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: manishbank
+    runtime: static
+    branch: main
+    buildCommand: npm run build
+    staticPublishPath: ./dist
